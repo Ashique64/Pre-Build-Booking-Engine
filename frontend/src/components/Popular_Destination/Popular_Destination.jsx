@@ -33,17 +33,17 @@ const Popular_Destination = () => {
 
   return (
     <section className="destinations-section">
-      <div className="container">
+      <div className="container dest-container">
         <div className="animate-on-scroll" data-aos="fade-up">
           <h2 className="section-title">Popular Destinations</h2>
         </div>
 
-        <div className="row g-4">
+        <div className="row g-4 dest-row">
           {destinations.map((destination, index) => (
             <div
               key={index}
               data-aos="fade-up"
-              className="col-lg-3 col-md-6 animate-on-scroll"
+              className="col-lg-3 col-md-6 animate-on-scroll dest-col"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               <div className="destination-card">
