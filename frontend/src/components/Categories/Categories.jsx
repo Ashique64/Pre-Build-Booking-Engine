@@ -9,27 +9,37 @@ const Categories = () => {
       icon: "fas fa-umbrella-beach",
       title: "Beachfront",
       desc: "Ocean view properties",
+      image: "/assets/beach.jpg",
     },
     {
       icon: "fas fa-paw",
       title: "Pet-friendly",
       desc: "Bring your furry friends",
+      image: "/assets/pet.jpg",
     },
     {
       icon: "fas fa-wallet",
       title: "Budget-friendly",
       desc: "Great value stays",
+      image: "/assets/budget.jpg",
     },
-    { icon: "fas fa-crown", title: "Luxury", desc: "Premium experiences" },
+    {
+      icon: "fas fa-crown",
+      title: "Luxury",
+      desc: "Premium experiences",
+      image: "/assets/luxury.jpg",
+    },
     {
       icon: "fas fa-users",
       title: "Family-friendly",
       desc: "Perfect for families",
+      image: "/assets/family.jpg",
     },
     {
       icon: "fas fa-briefcase",
       title: "Business",
       desc: "Corporate travelers",
+      image: "/assets/business.jpg",
     },
   ];
 
@@ -40,7 +50,7 @@ const Categories = () => {
   return (
     <section className="categories-section">
       <div className="container categories-container">
-        <div className="animate-on-scroll">
+        <div className="animate-on-scroll" data-aos="fade-up">
           <h2 className="section-title">Browse by Category</h2>
         </div>
 
@@ -49,9 +59,13 @@ const Categories = () => {
             <div
               key={index}
               className="col-lg-4 col-md-6 animate-on-scroll category-col"
+              data-aos="fade-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="category-card">
+                <div className="category-img">
+                  <img src={category.image} alt={category.title} />
+                </div>
                 <div className="category-icon">
                   <i className={category.icon}></i>
                 </div>

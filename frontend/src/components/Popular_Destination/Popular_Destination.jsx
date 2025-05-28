@@ -8,22 +8,22 @@ const Popular_Destination = () => {
     {
       name: "Goa, India",
       image:
-        "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=400&h=300&fit=crop",
+        "/assets/goa.jpg",
     },
     {
       name: "Bali, Indonesia",
       image:
-        "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&h=300&fit=crop",
+        "/assets/bali.jpg",
     },
     {
       name: "Dubai, UAE",
       image:
-        "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=300&fit=crop",
+        "/assets/dubai.jpg",
     },
     {
       name: "Maldives",
       image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+        "/assets/maldives.jpg",
     },
   ];
 
