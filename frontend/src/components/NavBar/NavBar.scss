@@ -1,4 +1,4 @@
-.main-header-2 {
+.main-header {
   background: linear-gradient(
     135deg,
     var(--primary-color) 0%,
@@ -12,7 +12,6 @@
 
   .navbar {
     .nav-container {
-      
       .navbar-brand {
         font-weight: 700;
         font-size: 1.8rem;
@@ -26,8 +25,35 @@
       }
 
       .navbar-items {
-        display: flex;
-        justify-content: end;
+        .nav-item {
+          .nav-link {
+            color: var(--white) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+            transition: var(--transition);
+
+            &:hover {
+              color: var(--accent-color) !important;
+              transform: translateY(-2px);
+              &::after {
+                width: 100%;
+              }
+            }
+
+            &::after {
+              content: "";
+              position: absolute;
+              width: 0;
+              height: 2px;
+              bottom: -5px;
+              left: 50%;
+              background: var(--accent-color);
+              transition: var(--transition);
+              transform: translateX(-50%);
+            }
+          }
+        }
         .login-btn {
           background: linear-gradient(
             45deg,

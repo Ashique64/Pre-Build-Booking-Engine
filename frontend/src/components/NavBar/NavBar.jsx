@@ -7,7 +7,7 @@ const NavBar = () => {
       <nav className="navbar navbar-expand-lg">
         <div className="container nav-container py-lg-3">
           <a className="navbar-brand" href="#">
-            <img src="/assets/logo (5).png" alt="" />
+            <img src="/assets/logo (3).png" alt="" />
           </a>
 
           <button

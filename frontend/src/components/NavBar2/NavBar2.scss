@@ -24,39 +24,35 @@
         }
       }
 
-      .navbar-items {
-        .navbar-nav {
-          .nav-item {
-            .nav-link {
-              color: var(--white) !important;
-              font-weight: 500;
-              margin: 0 10px;
-              position: relative;
-              transition: var(--transition);
+      .mob-login-btn {
+          background: linear-gradient(
+            45deg,
+            var(--accent-color),
+            var(--primary-color)
+          );
+          border: none;
+          padding: 10px 25px;
+          border-radius: 25px;
+          color: var(--white);
+          font-weight: 600;
+          transition: var(--transition);
+          box-shadow: var(--shadow-md);
+          display: flex;
+          align-items: center;
 
-              &:hover {
-                color: var(--accent-color) !important;
-                transform: translateY(-2px);
-                &::after {
-                  width: 100%;
-                }
-              }
-
-              &::after {
-                content: "";
-                position: absolute;
-                width: 0;
-                height: 2px;
-                bottom: -5px;
-                left: 50%;
-                background: var(--accent-color);
-                transition: var(--transition);
-                transform: translateX(-50%);
-              }
-            }
+          i {
+            font-size: 22px;
+          }
+          &:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            color: var(--white);
           }
         }
 
+      .navbar-items {
+        display: flex;
+        justify-content: end;
         .login-btn {
           background: linear-gradient(
             45deg,

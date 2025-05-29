@@ -12,17 +12,11 @@ const NavBar2 = () => {
             </a>
           </div>
 
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-          >
-            <span className="navbar-toggler-icon"></span>
+          <button className="btn mob-login-btn d-block d-lg-none">
+            <i className="bx bx-home" />
           </button>
 
           <div className="collapse navbar-collapse navbar-items" id="navbarNav">
-
             <button className="btn login-btn d-none d-lg-block">
               <i className="bx bx-home" />
             </button>
