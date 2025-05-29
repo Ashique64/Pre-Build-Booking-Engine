@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import "./SearchResult.scss";
-import { Car, Coffee, Grid, List, MapPin, Star, Waves, Wifi } from "lucide-react";
+import {
+  Car,
+  Coffee,
+  Grid,
+  List,
+  MapPin,
+  Star,
+  Waves,
+  Wifi,
+} from "lucide-react";
 
 const SearchResult = () => {
   const [viewMode, setViewMode] = useState("grid");
@@ -81,10 +90,9 @@ const SearchResult = () => {
       rating: 4.5,
       userRating: 4.3,
       price: 6500,
-      image:
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      image: "/assets/demo-hotel-1.jpg",
       amenities: ["Free Breakfast", "Wi-Fi", "Pool"],
-      tags: ["Free Cancellation", "Beach Front"],
+      tags: ["Luxury", "Beach Front"],
       type: "Resort",
     },
     {
@@ -94,8 +102,7 @@ const SearchResult = () => {
       rating: 4.2,
       userRating: 4.0,
       price: 4200,
-      image:
-        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop",
+      image: "/assets/demo-hotel-2.jpg",
       amenities: ["Wi-Fi", "Parking", "Gym"],
       tags: ["Pet-friendly", "City Center"],
       type: "Boutique",
@@ -107,8 +114,7 @@ const SearchResult = () => {
       rating: 4.8,
       userRating: 4.6,
       price: 8900,
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+      image: "/assets/demo-hotel-3.jpg",
       amenities: ["Free Breakfast", "Wi-Fi", "Spa", "Pool"],
       tags: ["Heritage", "Luxury"],
       type: "Resort",
@@ -120,8 +126,7 @@ const SearchResult = () => {
       rating: 4.1,
       userRating: 3.9,
       price: 3200,
-      image:
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
+      image: "/assets/demo-hotel-4.jpg",
       amenities: ["Wi-Fi", "Kitchen", "Parking"],
       tags: ["Budget-friendly", "Self-service"],
       type: "Apartment",

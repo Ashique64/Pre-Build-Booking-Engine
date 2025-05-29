@@ -2,22 +2,28 @@ import React, { useEffect, useState } from "react";
 import "./Hero.scss";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [location, setLocation] = useState("");
   const [guests, setGuests] = useState(2);
+  const navigate = useNavigate();
 
-  const handleSearch = () => {
-    console.log("Search initiated with:", {
-      location,
-      checkInDate,
-      checkOutDate,
-      guests,
-    });
-    alert("Search functionality would be implemented here!");
+  const handleSearchNavigate = () => {
+    navigate("/search");
   };
+
+  // const handleSearch = () => {
+  //   console.log("Search initiated with:", {
+  //     location,
+  //     checkInDate,
+  //     checkOutDate,
+  //     guests,
+  //   });
+  //   alert("Search functionality would be implemented here!");
+  // };
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
@@ -35,7 +41,9 @@ const Hero = () => {
         <div className="row justify-content-center hero-content-row">
           <div className="col-lg-10 hero-content-col">
             <div className="text-center mb-5 hero-content-title">
-              <h1 className="hero-title" data-aos="fade-up">Find Your Perfect Stay</h1>
+              <h1 className="hero-title" data-aos="fade-up">
+                Find Your Perfect Stay
+              </h1>
               <p className="hero-subtitle" data-aos="fade-up">
                 Discover amazing hotels and resorts for your next adventure
                 around the world
@@ -113,7 +121,10 @@ const Hero = () => {
 
                 <div className="col-lg-12 col-xl-2 mb-3">
                   <div className="d-flex justify-content-center h-100 align-items-center">
-                    <button className="btn search-btn text-white" onClick={handleSearch}>
+                    <button
+                      className="btn search-btn text-white"
+                      onClick={handleSearchNavigate}
+                    >
                       <i className="fas fa-search me-2"></i>
                       Search Hotels
                     </button>
