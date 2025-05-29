@@ -3,12 +3,11 @@ import "./NavBar.scss";
 
 const NavBar = () => {
   return (
-    <nav className="main-header">
+    <section className="main-header">
       <nav className="navbar navbar-expand-lg">
-        <div className="container py-lg-3">
+        <div className="container nav-container py-lg-3">
           <a className="navbar-brand" href="#">
-            <i className="fas fa-hotel me-2"></i>
-            StayBooker
+            <img src="/assets/logo (5).png" alt="" />
           </a>
 
           <button
@@ -20,7 +19,7 @@ const NavBar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <div className="collapse navbar-collapse navbar-items" id="navbarNav">
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
                 <a className="nav-link" href="#">
@@ -45,13 +44,13 @@ const NavBar = () => {
             </ul>
 
             <button className="btn login-btn">
-              <i className="fas fa-user me-2"></i>
+              <i className="bx bxs-user-circle bx-brust me-2" />
               Login
             </button>
           </div>
         </div>
       </nav>
-    </nav>
+    </section>
   );
 };
 

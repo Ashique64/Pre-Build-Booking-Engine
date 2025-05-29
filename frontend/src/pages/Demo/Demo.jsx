@@ -1,328 +1,319 @@
-// import React, { useEffect, useState } from "react";
-// import './Demo.scss'
-
+// import React, { useState } from "react";
+// import { Search, MapPin, Star, Wifi, Car, Coffee, Waves, Filter, Grid, List, ChevronDown } from 'lucide-react';
+// import "./Demo.scss";
 
 // const Demo = () => {
-//   const [checkInDate, setCheckInDate] = useState("");
-//   const [checkOutDate, setCheckOutDate] = useState("");
-//   const [location, setLocation] = useState("");
-//   const [adults, setAdults] = useState(2);
-//   const [children, setChildren] = useState(0);
+//   const [viewMode, setViewMode] = useState("grid");
+//   const [filters, setFilters] = useState({
+//     priceRange: [0, 15000],
+//     starRating: 0,
+//     amenities: [],
+//     hotelType: "",
+//     userRating: 0,
+//   });
+//   const [searchQuery, setSearchQuery] = useState("");
+
+//   const hotels = [
+//     {
+//       id: 1,
+//       name: "Sunrise Paradise Resort",
+//       location: "Goa, India",
+//       rating: 4.5,
+//       userRating: 4.3,
+//       price: 6500,
+//       image:
+//         "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+//       amenities: ["Free Breakfast", "Wi-Fi", "Pool"],
+//       tags: ["Free Cancellation", "Beach Front"],
+//       type: "Resort",
+//     },
+//     {
+//       id: 2,
+//       name: "Urban Boutique Hotel",
+//       location: "Mumbai, India",
+//       rating: 4.2,
+//       userRating: 4.0,
+//       price: 4200,
+//       image:
+//         "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop",
+//       amenities: ["Wi-Fi", "Parking", "Gym"],
+//       tags: ["Pet-friendly", "City Center"],
+//       type: "Boutique",
+//     },
+//     {
+//       id: 3,
+//       name: "Heritage Palace",
+//       location: "Rajasthan, India",
+//       rating: 4.8,
+//       userRating: 4.6,
+//       price: 8900,
+//       image:
+//         "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+//       amenities: ["Free Breakfast", "Wi-Fi", "Spa", "Pool"],
+//       tags: ["Heritage", "Luxury"],
+//       type: "Resort",
+//     },
+//     {
+//       id: 4,
+//       name: "Modern Apartment Suites",
+//       location: "Bangalore, India",
+//       rating: 4.1,
+//       userRating: 3.9,
+//       price: 3200,
+//       image:
+//         "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
+//       amenities: ["Wi-Fi", "Kitchen", "Parking"],
+//       tags: ["Budget-friendly", "Self-service"],
+//       type: "Apartment",
+//     },
+//   ];
 
 //   const categories = [
-//     {
-//       icon: "fas fa-umbrella-beach",
-//       title: "Beachfront",
-//       desc: "Ocean view properties",
-//     },
-//     {
-//       icon: "fas fa-paw",
-//       title: "Pet-friendly",
-//       desc: "Bring your furry friends",
-//     },
-//     {
-//       icon: "fas fa-wallet",
-//       title: "Budget-friendly",
-//       desc: "Great value stays",
-//     },
-//     { icon: "fas fa-crown", title: "Luxury", desc: "Premium experiences" },
-//     {
-//       icon: "fas fa-users",
-//       title: "Family-friendly",
-//       desc: "Perfect for families",
-//     },
-//     {
-//       icon: "fas fa-briefcase",
-//       title: "Business",
-//       desc: "Corporate travelers",
-//     },
+//     "Beachfront",
+//     "Pet-friendly",
+//     "Budget-friendly",
+//     "Luxury",
 //   ];
-
-//   const destinations = [
-//     {
-//       name: "Goa, India",
-//       image:
-//         "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=400&h=300&fit=crop",
-//     },
-//     {
-//       name: "Bali, Indonesia",
-//       image:
-//         "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&h=300&fit=crop",
-//     },
-//     {
-//       name: "Dubai, UAE",
-//       image:
-//         "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=300&fit=crop",
-//     },
-//     {
-//       name: "Maldives",
-//       image:
-//         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
-//     },
+//   // const destinations = ["Goa", "Bali", "Dubai", "Maldives"];
+//   const amenitiesList = [
+//     "Wi-Fi",
+//     "Pool",
+//     "Parking",
+//     "Gym",
+//     "Spa",
+//     "Restaurant",
 //   ];
+//   const hotelTypes = ["Boutique", "Resort", "Apartment", "Hotel"];
 
-//   useEffect(() => {
-//     const observerOptions = {
-//       threshold: 0.1,
-//       rootMargin: "0px 0px -50px 0px",
-//     };
-
-//     const observer = new IntersectionObserver((entries) => {
-//       entries.forEach((entry) => {
-//         if (entry.isIntersecting) {
-//           entry.target.classList.add("animate");
+//   const renderStars = (rating) => {
+//     return Array.from({ length: 5 }, (_, i) => (
+//       <Star
+//         key={i}
+//         size={16}
+//         className={
+//           i < Math.floor(rating)
+//             ? "fill-yellow-400 text-yellow-400"
+//             : "text-gray-300"
 //         }
-//       });
-//     }, observerOptions);
-
-//     const animateElements = document.querySelectorAll(".animate-on-scroll");
-//     animateElements.forEach((el) => observer.observe(el));
-
-//     return () => observer.disconnect();
-//   }, []);
-
-//   const handleSearch = () => {
-//     console.log("Search initiated with:", {
-//       location,
-//       checkInDate,
-//       checkOutDate,
-//       adults,
-//       children,
-//     });
-//     alert("Search functionality would be implemented here!");
+//       />
+//     ));
 //   };
 
+//   const HotelCard = ({ hotel, isListView = false }) => (
+//     <div className={`hotel-card ${isListView ? "hotel-card--list" : ""}`}>
+//       <div className="hotel-card__image">
+//         <img src={hotel.image} alt={hotel.name} />
+//         <div className="hotel-card__rating">
+//           <div className="stars">{renderStars(hotel.rating)}</div>
+//           <span className="rating-text">({hotel.rating})</span>
+//         </div>
+//       </div>
+
+//       <div className="hotel-card__content">
+//         <h3 className="hotel-card__name">{hotel.name}</h3>
+
+//         <div className="hotel-card__location">
+//           <MapPin size={16} />
+//           <span>{hotel.location}</span>
+//         </div>
+
+//         <div className="hotel-card__user-rating">
+//           <div className="stars">{renderStars(hotel.userRating)}</div>
+//           <span>({hotel.userRating}) User Reviews</span>
+//         </div>
+
+//         <div className="hotel-card__price">
+//           <span className="currency">₹</span>
+//           <span className="amount">{hotel.price.toLocaleString()}</span>
+//           <span className="period">/ night</span>
+//         </div>
+
+//         <div className="hotel-card__amenities">
+//           {hotel.amenities.map((amenity, index) => (
+//             <span key={index} className="amenity-tag">
+//               {amenity === "Wi-Fi" && <Wifi size={14} />}
+//               {amenity === "Pool" && <Waves size={14} />}
+//               {amenity === "Parking" && <Car size={14} />}
+//               {amenity === "Free Breakfast" && <Coffee size={14} />}
+//               {amenity}
+//             </span>
+//           ))}
+//         </div>
+
+//         <div className="hotel-card__tags">
+//           {hotel.tags.map((tag, index) => (
+//             <span key={index} className="hotel-tag">
+//               {tag}
+//             </span>
+//           ))}
+//         </div>
+
+//         <button className="hotel-card__book-btn">Book Now</button>
+//       </div>
+//     </div>
+//   );
 //   return (
 //     <>
-//       {/* Header */}
-//       <header className="main-header">
-//         <nav className="navbar navbar-expand-lg">
-//           <div className="container">
-//             <a className="navbar-brand" href="#">
-//               <i className="fas fa-hotel me-2"></i>
-//               StayBooker
-//             </a>
+//       <div className="search-header">
+//         <div className="search-container">
+//           <h1 className="search-title">Find Your Perfect Stay</h1>
+//           <p className="search-subtitle">
+//             Discover amazing hotels and accommodations worldwide
+//           </p>
 
-//             <button
-//               className="navbar-toggler"
-//               type="button"
-//               data-bs-toggle="collapse"
-//               data-bs-target="#navbarNav"
-//             >
-//               <span className="navbar-toggler-icon"></span>
+//           <div className="search-bar">
+//             <input
+//               type="text"
+//               placeholder="Where are you going?"
+//               className="search-input"
+//               value={searchQuery}
+//               onChange={(e) => setSearchQuery(e.target.value)}
+//             />
+//             <button className="search-btn">
+//               <Search size={20} />
+//               Search
 //             </button>
+//           </div>
 
-//             <div className="collapse navbar-collapse" id="navbarNav">
-//               <ul className="navbar-nav mx-auto">
-//                 <li className="nav-item">
-//                   <a className="nav-link" href="#">
-//                     Home
-//                   </a>
-//                 </li>
-//                 <li className="nav-item">
-//                   <a className="nav-link" href="#">
-//                     About
-//                   </a>
-//                 </li>
-//                 <li className="nav-item">
-//                   <a className="nav-link" href="#">
-//                     List Your Hotel
-//                   </a>
-//                 </li>
-//                 <li className="nav-item">
-//                   <a className="nav-link" href="#">
-//                     Contact
-//                   </a>
-//                 </li>
-//               </ul>
+//           <div className="category-tabs">
+//             {categories.map((category) => (
+//               <button key={category} className="category-tab">
+//                 {category}
+//               </button>
+//             ))}
+//           </div>
+//         </div>
+//       </div>
 
-//               <button className="btn login-btn">
-//                 <i className="fas fa-user me-2"></i>
-//                 Login
+//       <div className="main-content">
+//         {/* Sidebar Filters */}
+//         <div className="sidebar">
+//           <h3>
+//             <Filter size={20} />
+//             Filters
+//           </h3>
+
+//           <div className="filter-section">
+//             <h4>Price Range</h4>
+//             <div className="price-range">
+//               <input
+//                 type="range"
+//                 min="0"
+//                 max="20000"
+//                 value={filters.priceRange[1]}
+//                 className="price-input"
+//                 onChange={(e) =>
+//                   setFilters({
+//                     ...filters,
+//                     priceRange: [0, parseInt(e.target.value)],
+//                   })
+//                 }
+//               />
+//               <div>₹0 - ₹{filters.priceRange[1].toLocaleString()}</div>
+//             </div>
+//           </div>
+
+//           <div className="filter-section">
+//             <h4>Star Rating</h4>
+//             <div className="star-filter">
+//               {[1, 2, 3, 4, 5].map((star) => (
+//                 <button
+//                   key={star}
+//                   className="star-btn"
+//                   onClick={() => setFilters({ ...filters, starRating: star })}
+//                 >
+//                   <Star
+//                     size={20}
+//                     className={
+//                       star <= filters.starRating
+//                         ? "fill-yellow-400 text-yellow-400"
+//                         : "text-gray-300"
+//                     }
+//                   />
+//                 </button>
+//               ))}
+//             </div>
+//           </div>
+
+//           <div className="filter-section">
+//             <h4>Amenities</h4>
+//             <div className="checkbox-group">
+//               {amenitiesList.map((amenity) => (
+//                 <label key={amenity} className="checkbox-item">
+//                   <input
+//                     type="checkbox"
+//                     checked={filters.amenities.includes(amenity)}
+//                     onChange={(e) => {
+//                       if (e.target.checked) {
+//                         setFilters({
+//                           ...filters,
+//                           amenities: [...filters.amenities, amenity],
+//                         });
+//                       } else {
+//                         setFilters({
+//                           ...filters,
+//                           amenities: filters.amenities.filter(
+//                             (a) => a !== amenity
+//                           ),
+//                         });
+//                       }
+//                     }}
+//                   />
+//                   {amenity}
+//                 </label>
+//               ))}
+//             </div>
+//           </div>
+
+//           <div className="filter-section">
+//             <h4>Hotel Type</h4>
+//             <div className="checkbox-group">
+//               {hotelTypes.map((type) => (
+//                 <label key={type} className="checkbox-item">
+//                   <input
+//                     type="radio"
+//                     name="hotelType"
+//                     checked={filters.hotelType === type}
+//                     onChange={() => setFilters({ ...filters, hotelType: type })}
+//                   />
+//                   {type}
+//                 </label>
+//               ))}
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Results Section */}
+//         <div className="results-section">
+//           <div className="results-header">
+//             <h2 className="results-title">{hotels.length} Hotels Found</h2>
+//             <div className="view-controls">
+//               <button
+//                 className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
+//                 onClick={() => setViewMode("grid")}
+//               >
+//                 <Grid size={20} />
+//               </button>
+//               <button
+//                 className={`view-btn ${viewMode === "list" ? "active" : ""}`}
+//                 onClick={() => setViewMode("list")}
+//               >
+//                 <List size={20} />
 //               </button>
 //             </div>
 //           </div>
-//         </nav>
-//       </header>
 
-//       {/* Hero Section */}
-//       <section className="hero-section">
-//         <div className="floating-shapes">
-//           <div className="shape"></div>
-//           <div className="shape"></div>
-//           <div className="shape"></div>
-//         </div>
-
-//         <div className="container hero-content">
-//           <div className="row justify-content-center">
-//             <div className="col-lg-10">
-//               <div className="text-center mb-5">
-//                 <h1 className="hero-title">Find Your Perfect Stay</h1>
-//                 <p className="hero-subtitle">
-//                   Discover amazing hotels and resorts for your next adventure
-//                   around the world
-//                 </p>
-//               </div>
-
-//               {/* Search Card */}
-//               <div className="search-card">
-//                 <div className="row g-4">
-//                   <div className="col-lg-6 col-xl-3">
-//                     <div className="form-floating position-relative">
-//                       <i className="fas fa-map-marker-alt input-icon"></i>
-//                       <input
-//                         type="text"
-//                         className="form-control"
-//                         id="floatingLocation"
-//                         placeholder="Where are you going?"
-//                         value={location}
-//                         onChange={(e) => setLocation(e.target.value)}
-//                       />
-//                       <label htmlFor="floatingLocation">Location</label>
-//                     </div>
-//                   </div>
-
-//                   <div className="col-lg-6 col-xl-2">
-//                     <div className="form-floating position-relative">
-//                       <i className="fas fa-calendar-alt input-icon"></i>
-//                       <input
-//                         type="date"
-//                         className="form-control"
-//                         id="floatingCheckin"
-//                         value={checkInDate}
-//                         onChange={(e) => setCheckInDate(e.target.value)}
-//                       />
-//                       <label htmlFor="floatingCheckin">Check-in</label>
-//                     </div>
-//                   </div>
-
-//                   <div className="col-lg-6 col-xl-2">
-//                     <div className="form-floating position-relative">
-//                       <i className="fas fa-calendar-alt input-icon"></i>
-//                       <input
-//                         type="date"
-//                         className="form-control"
-//                         id="floatingCheckout"
-//                         value={checkOutDate}
-//                         onChange={(e) => setCheckOutDate(e.target.value)}
-//                       />
-//                       <label htmlFor="floatingCheckout">Check-out</label>
-//                     </div>
-//                   </div>
-
-//                   <div className="col-lg-6 col-xl-2">
-//                     <div className="row g-2">
-//                       <div className="col-6">
-//                         <div className="form-floating position-relative">
-//                           <i className="fas fa-user input-icon"></i>
-//                           <select
-//                             className="form-select"
-//                             id="floatingAdults"
-//                             value={adults}
-//                             onChange={(e) => setAdults(Number(e.target.value))}
-//                           >
-//                             {[1, 2, 3, 4, 5, 6].map((num) => (
-//                               <option key={num} value={num}>
-//                                 {num}
-//                               </option>
-//                             ))}
-//                           </select>
-//                           <label htmlFor="floatingAdults">Adults</label>
-//                         </div>
-//                       </div>
-//                       <div className="col-6">
-//                         <div className="form-floating">
-//                           <select
-//                             className="form-select"
-//                             id="floatingChildren"
-//                             value={children}
-//                             onChange={(e) =>
-//                               setChildren(Number(e.target.value))
-//                             }
-//                           >
-//                             {[0, 1, 2, 3, 4].map((num) => (
-//                               <option key={num} value={num}>
-//                                 {num}
-//                               </option>
-//                             ))}
-//                           </select>
-//                           <label htmlFor="floatingChildren">Children</label>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   <div className="col-lg-12 col-xl-3">
-//                     <div className="d-flex justify-content-center h-100 align-items-end">
-//                       <button className="btn search-btn" onClick={handleSearch}>
-//                         <i className="fas fa-search me-2"></i>
-//                         Search Hotels
-//                       </button>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-
-//       {/* Categories Section */}
-//       <section className="categories-section">
-//         <div className="container">
-//           <div className="animate-on-scroll">
-//             <h2 className="section-title">Browse by Category</h2>
-//           </div>
-
-//           <div className="row g-4">
-//             {categories.map((category, index) => (
-//               <div
-//                 key={index}
-//                 className="col-lg-4 col-md-6 animate-on-scroll"
-//                 style={{ animationDelay: `${index * 0.1}s` }}
-//               >
-//                 <div className="category-card">
-//                   <div className="category-icon">
-//                     <i className={category.icon}></i>
-//                   </div>
-//                   <h4 className="category-title">{category.title}</h4>
-//                   <p className="category-desc">{category.desc}</p>
-//                 </div>
-//               </div>
+//           <div className={viewMode === "grid" ? "hotels-grid" : "hotels-list"}>
+//             {hotels.map((hotel) => (
+//               <HotelCard
+//                 key={hotel.id}
+//                 hotel={hotel}
+//                 isListView={viewMode === "list"}
+//               />
 //             ))}
 //           </div>
 //         </div>
-//       </section>
-
-//       {/* Popular Destinations */}
-//       <section className="destinations-section">
-//         <div className="container">
-//           <div className="animate-on-scroll">
-//             <h2 className="section-title">Popular Destinations</h2>
-//           </div>
-
-//           <div className="row g-4">
-//             {destinations.map((destination, index) => (
-//               <div
-//                 key={index}
-//                 className="col-lg-3 col-md-6 animate-on-scroll"
-//                 style={{ animationDelay: `${index * 0.2}s` }}
-//               >
-//                 <div className="destination-card">
-//                   <img
-//                     src={destination.image}
-//                     alt={destination.name}
-//                     className="destination-img"
-//                   />
-//                   <div className="destination-overlay">
-//                     <h4 className="destination-title">{destination.name}</h4>
-//                   </div>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//         </div>
-//       </section>
+//       </div>
 //     </>
 //   );
 // };
