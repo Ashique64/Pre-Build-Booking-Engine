@@ -115,6 +115,7 @@ const HotelDetails = () => {
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
+    window.scrollTo(0, 0);
     const interval = setInterval(nextImage, 5000);
     return () => clearInterval(interval);
   });

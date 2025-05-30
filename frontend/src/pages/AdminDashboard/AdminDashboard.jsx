@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -134,6 +134,10 @@ const AdminDashboard = () => {
     console.log("Form submitted:", formData);
     // Handle form submission
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const StatCard = ({
     icon: Icon,

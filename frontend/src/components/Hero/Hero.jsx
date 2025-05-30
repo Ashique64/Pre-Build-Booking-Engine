@@ -56,14 +56,17 @@ const Hero = () => {
                 <div className="col-lg-6 col-xl-4">
                   <div className="form-floating position-relative">
                     <i className="fas fa-map-marker-alt input-icon"></i>
-                    <input
-                      type="text"
-                      className="form-control"
+                    <select
+                      className="form-select"
                       id="floatingLocation"
-                      placeholder="Where are you going?"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                    />
+                    >
+                      <option value="">Select a location</option>
+                      <option value="Munnar">Munnar</option>
+                      <option value="Varkala">Varkala</option>
+                      <option value="Wayanad">Wayanad</option>
+                    </select>
                     <label htmlFor="floatingLocation">Location</label>
                   </div>
                 </div>
