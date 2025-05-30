@@ -22,6 +22,8 @@ import {
 } from "lucide-react";
 import "./HotelDetails.scss";
 import { useNavigate } from "react-router-dom";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const HotelDetails = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -112,6 +114,7 @@ const HotelDetails = () => {
   };
 
   useEffect(() => {
+    Aos.init({ duration: 1000 });
     const interval = setInterval(nextImage, 5000);
     return () => clearInterval(interval);
   });
@@ -201,7 +204,7 @@ const HotelDetails = () => {
           </button>
 
           {/* Hero Content */}
-          <div className="hero__content">
+          <div className="hero__content" data-aos="fade-up">
             <div className="hero__content-wrapper">
               <h1 className="hero__title">{hotel.name}</h1>
               <div className="hero__info">
@@ -238,7 +241,7 @@ const HotelDetails = () => {
 
         {/* Main Content */}
         <div className="main-content-2 container">
-          <div className="description-section row">
+          <div className="description-section row" data-aos="fade-up">
             <div className="description-section__content col-md-12">
               <h2 className="section-title">About Our Hotel</h2>
               <p className="description-section__text">{hotel.description}</p>
@@ -246,7 +249,7 @@ const HotelDetails = () => {
           </div>
 
           {/* Amenities Section */}
-          <div className="amenities-section">
+          <div className="amenities-section" data-aos="fade-up">
             <h2 className="section-title section-title--center">
               Premium Amenities
             </h2>
@@ -272,7 +275,7 @@ const HotelDetails = () => {
           </div>
 
           {/* Map Section */}
-          <div className="map-section">
+          <div className="map-section" data-aos="fade-up">
             <h2 className="section-title section-title--center">
               Perfect Location
             </h2>
@@ -288,7 +291,7 @@ const HotelDetails = () => {
           </div>
 
           {/* Final CTA */}
-          <div className="final-cta">
+          <div className="final-cta" data-aos="fade-up">
             <h2 className="final-cta__title">
               Ready for an Unforgettable Experience?
             </h2>

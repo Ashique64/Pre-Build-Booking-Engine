@@ -29,7 +29,7 @@ const FilterSection = () => {
   }, []);
 
   return (
-    <div className="sidebar">
+    <div className="sidebar" data-aos="fade-right">
       <h3>
         <Filter size={20} />
         Filters

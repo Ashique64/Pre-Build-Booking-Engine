@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "./SearchResult.scss";
+import React, { useEffect, useState } from "react";
 import {
   Car,
   Coffee,
@@ -11,6 +10,10 @@ import {
   Wifi,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import "./SearchResult.scss";
+
 
 const hotels = [
   {
@@ -74,8 +77,12 @@ const hotels = [
 const SearchResult = () => {
   const [viewMode, setViewMode] = useState("grid");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
+  
   const handleOfficialWebsiteNavigate = (event, url) => {
     event.stopPropagation();
     window.open(url, "_blank");
@@ -83,8 +90,8 @@ const SearchResult = () => {
   };
 
   const handleCardNavigate = () => {
-    navigate('/hotel-details')
-  }
+    navigate("/hotel-details");
+  };
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -100,8 +107,13 @@ const SearchResult = () => {
     ));
   };
 
+
   const HotelCard = ({ hotel, isListView = false }) => (
-    <div onClick={handleCardNavigate} className={`hotel-card ${isListView ? "hotel-card--list" : ""}`}>
+    <div
+    data-aos="zoom-in"
+      onClick={handleCardNavigate}
+      className={`hotel-card ${isListView ? "hotel-card--list" : ""}`}
+    >
       <div className="hotel-card__image">
         <div className="verified-tag">
           <img src="/assets/logo (3).png" alt="Verified" />
@@ -174,7 +186,7 @@ const SearchResult = () => {
   );
 
   return (
-    <div className="results-section">
+    <div className="results-section" data-aos="zoom-in">
       <div className="results-header">
         <h2 className="results-title">{hotels.length} Hotels Found</h2>
         <div className="view-controls">
