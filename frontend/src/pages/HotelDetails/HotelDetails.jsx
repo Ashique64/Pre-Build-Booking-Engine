@@ -115,10 +115,13 @@ const HotelDetails = () => {
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
-    window.scrollTo(0, 0);
     const interval = setInterval(nextImage, 5000);
     return () => clearInterval(interval);
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const ImageModal = () => (
     <div className="image-modal" onClick={() => setIsImageModalOpen(false)}>
