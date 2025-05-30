@@ -1,320 +1,551 @@
 // import React, { useState } from "react";
-// import { Search, MapPin, Star, Wifi, Car, Coffee, Waves, Filter, Grid, List, ChevronDown } from 'lucide-react';
+// import {
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   ResponsiveContainer,
+//   LineChart,
+//   Line,
+//   PieChart,
+//   Pie,
+//   Cell,
+// } from "recharts";
+// import {
+//   TrendingUp,
+//   Users,
+//   DollarSign,
+//   MousePointer,
+//   ExternalLink,
+//   Hotel,
+//   Plus,
+//   Calendar,
+//   Globe,
+//   Phone,
+//   Mail,
+//   MapPin,
+//   Star,
+//   CheckCircle,
+//   AlertCircle,
+//   BarChart3,
+//   Activity,
+// } from "lucide-react";
+
 // import "./Demo.scss";
 
 // const Demo = () => {
-//   const [viewMode, setViewMode] = useState("grid");
-//   const [filters, setFilters] = useState({
-//     priceRange: [0, 15000],
-//     starRating: 0,
-//     amenities: [],
-//     hotelType: "",
-//     userRating: 0,
+//   const [activeTab, setActiveTab] = useState("dashboard");
+//   const [formData, setFormData] = useState({
+//     hotelName: "",
+//     websiteUrl: "",
+//     bookingEngine: "",
+//     contactName: "",
+//     email: "",
+//     phone: "",
+//     address: "",
 //   });
-//   const [searchQuery, setSearchQuery] = useState("");
 
-//   const hotels = [
+//   // Sample data for analytics
+//   const trafficData = [
 //     {
-//       id: 1,
-//       name: "Sunrise Paradise Resort",
-//       location: "Goa, India",
-//       rating: 4.5,
-//       userRating: 4.3,
-//       price: 6500,
-//       image:
-//         "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
-//       amenities: ["Free Breakfast", "Wi-Fi", "Pool"],
-//       tags: ["Free Cancellation", "Beach Front"],
-//       type: "Resort",
+//       hotel: "Sunrise Paradise",
+//       clicks: 1250,
+//       redirects: 980,
+//       conversions: 156,
+//       revenue: 98400,
 //     },
 //     {
-//       id: 2,
-//       name: "Urban Boutique Hotel",
-//       location: "Mumbai, India",
-//       rating: 4.2,
-//       userRating: 4.0,
-//       price: 4200,
-//       image:
-//         "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop",
-//       amenities: ["Wi-Fi", "Parking", "Gym"],
-//       tags: ["Pet-friendly", "City Center"],
-//       type: "Boutique",
+//       hotel: "Urban Boutique",
+//       clicks: 890,
+//       redirects: 720,
+//       conversions: 89,
+//       revenue: 56800,
 //     },
 //     {
-//       id: 3,
-//       name: "Heritage Palace",
-//       location: "Rajasthan, India",
-//       rating: 4.8,
-//       userRating: 4.6,
-//       price: 8900,
-//       image:
-//         "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-//       amenities: ["Free Breakfast", "Wi-Fi", "Spa", "Pool"],
-//       tags: ["Heritage", "Luxury"],
-//       type: "Resort",
+//       hotel: "Heritage Palace",
+//       clicks: 2100,
+//       redirects: 1800,
+//       conversions: 290,
+//       revenue: 185600,
 //     },
 //     {
-//       id: 4,
-//       name: "Modern Apartment Suites",
-//       location: "Bangalore, India",
-//       rating: 4.1,
-//       userRating: 3.9,
-//       price: 3200,
-//       image:
-//         "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=300&fit=crop",
-//       amenities: ["Wi-Fi", "Kitchen", "Parking"],
-//       tags: ["Budget-friendly", "Self-service"],
-//       type: "Apartment",
+//       hotel: "Modern Suites",
+//       clicks: 650,
+//       redirects: 520,
+//       conversions: 67,
+//       revenue: 42800,
 //     },
 //   ];
 
-//   const categories = [
-//     "Beachfront",
-//     "Pet-friendly",
-//     "Budget-friendly",
-//     "Luxury",
+//   const bookingSummary = [
+//     {
+//       id: "BK001",
+//       hotelName: "Sunrise Paradise Resort",
+//       date: "2024-05-25",
+//       amount: 6500,
+//       referralId: "REF123",
+//     },
+//     {
+//       id: "BK002",
+//       hotelName: "Urban Boutique Hotel",
+//       date: "2024-05-24",
+//       amount: 4200,
+//       referralId: "REF124",
+//     },
+//     {
+//       id: "BK003",
+//       hotelName: "Heritage Palace",
+//       date: "2024-05-23",
+//       amount: 8900,
+//       referralId: "REF125",
+//     },
+//     {
+//       id: "BK004",
+//       hotelName: "Modern Apartment Suites",
+//       date: "2024-05-22",
+//       amount: 3200,
+//       referralId: "REF126",
+//     },
 //   ];
-//   // const destinations = ["Goa", "Bali", "Dubai", "Maldives"];
-//   const amenitiesList = [
-//     "Wi-Fi",
-//     "Pool",
-//     "Parking",
-//     "Gym",
-//     "Spa",
-//     "Restaurant",
-//   ];
-//   const hotelTypes = ["Boutique", "Resort", "Apartment", "Hotel"];
 
-//   const renderStars = (rating) => {
-//     return Array.from({ length: 5 }, (_, i) => (
-//       <Star
-//         key={i}
-//         size={16}
-//         className={
-//           i < Math.floor(rating)
-//             ? "fill-yellow-400 text-yellow-400"
-//             : "text-gray-300"
-//         }
-//       />
-//     ));
+//   const monthlyData = [
+//     { month: "Jan", revenue: 45000, bookings: 120 },
+//     { month: "Feb", revenue: 52000, bookings: 140 },
+//     { month: "Mar", revenue: 48000, bookings: 135 },
+//     { month: "Apr", revenue: 61000, bookings: 165 },
+//     { month: "May", revenue: 58000, bookings: 158 },
+//   ];
+
+//   const conversionData = [
+//     { name: "Conversions", value: 602, color: "#667eea" },
+//     { name: "Clicks", value: 4288, color: "#764ba2" },
+//   ];
+
+//   const handleInputChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       [e.target.name]: e.target.value,
+//     });
 //   };
 
-//   const HotelCard = ({ hotel, isListView = false }) => (
-//     <div className={`hotel-card ${isListView ? "hotel-card--list" : ""}`}>
-//       <div className="hotel-card__image">
-//         <img src={hotel.image} alt={hotel.name} />
-//         <div className="hotel-card__rating">
-//           <div className="stars">{renderStars(hotel.rating)}</div>
-//           <span className="rating-text">({hotel.rating})</span>
-//         </div>
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log("Form submitted:", formData);
+//   };
+
+//   const StatCard = ({
+//     icon: Icon,
+//     title,
+//     value,
+//     subtitle,
+//     trend,
+//     color = "primary",
+//   }) => (
+//     <div className={`stat-card stat-card--${color}`}>
+//       <div className="stat-card__icon">
+//         <Icon size={24} />
 //       </div>
-
-//       <div className="hotel-card__content">
-//         <h3 className="hotel-card__name">{hotel.name}</h3>
-
-//         <div className="hotel-card__location">
-//           <MapPin size={16} />
-//           <span>{hotel.location}</span>
-//         </div>
-
-//         <div className="hotel-card__user-rating">
-//           <div className="stars">{renderStars(hotel.userRating)}</div>
-//           <span>({hotel.userRating}) User Reviews</span>
-//         </div>
-
-//         <div className="hotel-card__price">
-//           <span className="currency">₹</span>
-//           <span className="amount">{hotel.price.toLocaleString()}</span>
-//           <span className="period">/ night</span>
-//         </div>
-
-//         <div className="hotel-card__amenities">
-//           {hotel.amenities.map((amenity, index) => (
-//             <span key={index} className="amenity-tag">
-//               {amenity === "Wi-Fi" && <Wifi size={14} />}
-//               {amenity === "Pool" && <Waves size={14} />}
-//               {amenity === "Parking" && <Car size={14} />}
-//               {amenity === "Free Breakfast" && <Coffee size={14} />}
-//               {amenity}
+//       <div className="stat-card__content">
+//         <h3 className="stat-card__title">{title}</h3>
+//         <div className="stat-card__value">{value}</div>
+//         <div className="stat-card__subtitle">
+//           {subtitle}
+//           {trend && (
+//             <span
+//               className={`trend ${trend > 0 ? "trend--up" : "trend--down"}`}
+//             >
+//               <TrendingUp size={16} />
+//               {Math.abs(trend)}%
 //             </span>
-//           ))}
+//           )}
 //         </div>
-
-//         <div className="hotel-card__tags">
-//           {hotel.tags.map((tag, index) => (
-//             <span key={index} className="hotel-tag">
-//               {tag}
-//             </span>
-//           ))}
-//         </div>
-
-//         <button className="hotel-card__book-btn">Book Now</button>
 //       </div>
 //     </div>
 //   );
-//   return (
-//     <>
-//       <div className="search-header">
-//         <div className="search-container">
-//           <h1 className="search-title">Find Your Perfect Stay</h1>
-//           <p className="search-subtitle">
-//             Discover amazing hotels and accommodations worldwide
-//           </p>
 
-//           <div className="search-bar">
-//             <input
-//               type="text"
-//               placeholder="Where are you going?"
-//               className="search-input"
-//               value={searchQuery}
-//               onChange={(e) => setSearchQuery(e.target.value)}
-//             />
-//             <button className="search-btn">
-//               <Search size={20} />
-//               Search
+//   return (
+//     <div className="admin-dashboard">
+//       <div className="dashboard-header">
+//         <div className="dashboard-nav">
+//           <h1 className="dashboard-title">Hotel Management Dashboard</h1>
+//           <div className="nav-tabs">
+//             <button
+//               className={`nav-tab ${activeTab === "dashboard" ? "active" : ""}`}
+//               onClick={() => setActiveTab("dashboard")}
+//             >
+//               <BarChart3 size={20} />
+//               Analytics Dashboard
+//             </button>
+//             <button
+//               className={`nav-tab ${
+//                 activeTab === "list-hotel" ? "active" : ""
+//               }`}
+//               onClick={() => setActiveTab("list-hotel")}
+//             >
+//               <Plus size={20} />
+//               List Your Hotel
 //             </button>
 //           </div>
-
-//           <div className="category-tabs">
-//             {categories.map((category) => (
-//               <button key={category} className="category-tab">
-//                 {category}
-//               </button>
-//             ))}
-//           </div>
 //         </div>
 //       </div>
 
-//       <div className="main-content">
-//         {/* Sidebar Filters */}
-//         <div className="sidebar">
-//           <h3>
-//             <Filter size={20} />
-//             Filters
-//           </h3>
-
-//           <div className="filter-section">
-//             <h4>Price Range</h4>
-//             <div className="price-range">
-//               <input
-//                 type="range"
-//                 min="0"
-//                 max="20000"
-//                 value={filters.priceRange[1]}
-//                 className="price-input"
-//                 onChange={(e) =>
-//                   setFilters({
-//                     ...filters,
-//                     priceRange: [0, parseInt(e.target.value)],
-//                   })
-//                 }
+//       <div className="dashboard-content">
+//         {activeTab === "dashboard" && (
+//           <>
+//             {/* Stats Overview */}
+//             <div className="stats-grid">
+//               <StatCard
+//                 icon={MousePointer}
+//                 title="Total Clicks"
+//                 value="4,890"
+//                 subtitle="This month"
+//                 trend={12.5}
+//                 color="primary"
 //               />
-//               <div>₹0 - ₹{filters.priceRange[1].toLocaleString()}</div>
+//               <StatCard
+//                 icon={ExternalLink}
+//                 title="Total Redirects"
+//                 value="4,020"
+//                 subtitle="This month"
+//                 trend={8.3}
+//                 color="secondary"
+//               />
+//               <StatCard
+//                 icon={Users}
+//                 title="Conversions"
+//                 value="602"
+//                 subtitle="This month"
+//                 trend={15.2}
+//                 color="success"
+//               />
+//               <StatCard
+//                 icon={DollarSign}
+//                 title="Revenue"
+//                 value="₹3,83,600"
+//                 subtitle="This month"
+//                 trend={22.1}
+//                 color="warning"
+//               />
 //             </div>
-//           </div>
 
-//           <div className="filter-section">
-//             <h4>Star Rating</h4>
-//             <div className="star-filter">
-//               {[1, 2, 3, 4, 5].map((star) => (
-//                 <button
-//                   key={star}
-//                   className="star-btn"
-//                   onClick={() => setFilters({ ...filters, starRating: star })}
-//                 >
-//                   <Star
-//                     size={20}
-//                     className={
-//                       star <= filters.starRating
-//                         ? "fill-yellow-400 text-yellow-400"
-//                         : "text-gray-300"
-//                     }
-//                   />
+//             {/* Charts */}
+//             <div className="charts-grid">
+//               <div className="chart-card">
+//                 <h3 className="chart-card__title">
+//                   <Activity size={20} />
+//                   Monthly Performance
+//                 </h3>
+//                 <ResponsiveContainer width="100%" height={300}>
+//                   <LineChart data={monthlyData}>
+//                     <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+//                     <XAxis dataKey="month" stroke="#718096" />
+//                     <YAxis stroke="#718096" />
+//                     <Tooltip
+//                       contentStyle={{
+//                         backgroundColor: "#ffffff",
+//                         border: "1px solid #e2e8f0",
+//                         borderRadius: "8px",
+//                         boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+//                       }}
+//                     />
+//                     <Line
+//                       type="monotone"
+//                       dataKey="revenue"
+//                       stroke="#667eea"
+//                       strokeWidth={3}
+//                       dot={{ fill: "#667eea", strokeWidth: 2, r: 4 }}
+//                     />
+//                   </LineChart>
+//                 </ResponsiveContainer>
+//               </div>
+
+//               <div className="chart-card">
+//                 <h3 className="chart-card__title">
+//                   <PieChart size={20} />
+//                   Conversion Ratio
+//                 </h3>
+//                 <ResponsiveContainer width="100%" height={300}>
+//                   <PieChart>
+//                     <Pie
+//                       data={conversionData}
+//                       cx="50%"
+//                       cy="50%"
+//                       innerRadius={60}
+//                       outerRadius={100}
+//                       paddingAngle={5}
+//                       dataKey="value"
+//                     >
+//                       {conversionData.map((entry, index) => (
+//                         <Cell key={`cell-${index}`} fill={entry.color} />
+//                       ))}
+//                     </Pie>
+//                     <Tooltip />
+//                   </PieChart>
+//                 </ResponsiveContainer>
+//               </div>
+//             </div>
+
+//             {/* Data Tables */}
+//             <div className="data-tables">
+//               {/* Hotel Traffic Tracking */}
+//               <div className="table-card">
+//                 <div className="table-card__header">
+//                   <h3 className="table-card__title">Hotel Traffic Tracking</h3>
+//                 </div>
+//                 <table className="data-table">
+//                   <thead>
+//                     <tr>
+//                       <th>Hotel Name</th>
+//                       <th>Clicks</th>
+//                       <th>Redirects</th>
+//                       <th>Estimated Conversions</th>
+//                       <th>Revenue</th>
+//                     </tr>
+//                   </thead>
+//                   <tbody>
+//                     {trafficData.map((hotel, index) => (
+//                       <tr key={index}>
+//                         <td>{hotel.hotel}</td>
+//                         <td>
+//                           <span className="metric-value metric-value--clicks">
+//                             {hotel.clicks}
+//                           </span>
+//                         </td>
+//                         <td>
+//                           <span className="metric-value">
+//                             {hotel.redirects}
+//                           </span>
+//                         </td>
+//                         <td>
+//                           <span className="metric-value metric-value--conversions">
+//                             {hotel.conversions}
+//                           </span>
+//                         </td>
+//                         <td>
+//                           <span className="metric-value metric-value--revenue">
+//                             ₹{hotel.revenue.toLocaleString()}
+//                           </span>
+//                         </td>
+//                       </tr>
+//                     ))}
+//                   </tbody>
+//                 </table>
+//               </div>
+
+//               {/* Booking Summary */}
+//               <div className="table-card">
+//                 <div className="table-card__header">
+//                   <h3 className="table-card__title">Booking Summary</h3>
+//                 </div>
+//                 <table className="data-table">
+//                   <thead>
+//                     <tr>
+//                       <th>Booking ID</th>
+//                       <th>Hotel Name</th>
+//                       <th>Date</th>
+//                       <th>Amount</th>
+//                       <th>Referral ID</th>
+//                     </tr>
+//                   </thead>
+//                   <tbody>
+//                     {bookingSummary.map((booking) => (
+//                       <tr key={booking.id}>
+//                         <td>
+//                           <strong>{booking.id}</strong>
+//                         </td>
+//                         <td>{booking.hotelName}</td>
+//                         <td>{booking.date}</td>
+//                         <td>
+//                           <span className="metric-value metric-value--revenue">
+//                             ₹{booking.amount.toLocaleString()}
+//                           </span>
+//                         </td>
+//                         <td>{booking.referralId}</td>
+//                       </tr>
+//                     ))}
+//                   </tbody>
+//                 </table>
+//               </div>
+//             </div>
+//           </>
+//         )}
+
+//         {activeTab === "list-hotel" && (
+//           <div className="form-container">
+//             {/* Benefits Section */}
+//             <div className="benefits-list">
+//               <h3>
+//                 <CheckCircle size={20} color="#48bb78" />
+//                 Benefits of Being Listed
+//               </h3>
+//               <ul>
+//                 <li>
+//                   <CheckCircle size={16} color="#48bb78" />
+//                   Increased visibility and reach to potential customers
+//                 </li>
+//                 <li>
+//                   <CheckCircle size={16} color="#48bb78" />
+//                   Detailed traffic reports and analytics
+//                 </li>
+//                 <li>
+//                   <CheckCircle size={16} color="#48bb78" />
+//                   Real-time booking tracking and conversion insights
+//                 </li>
+//                 <li>
+//                   <CheckCircle size={16} color="#48bb78" />
+//                   Professional listing with high-quality images
+//                 </li>
+//                 <li>
+//                   <CheckCircle size={16} color="#48bb78" />
+//                   Integration with major booking engines
+//                 </li>
+//               </ul>
+//             </div>
+
+//             {/* Registration Form */}
+//             <form onSubmit={handleSubmit}>
+//               <div className="form-card">
+//                 <div className="form-section">
+//                   <h3 className="form-section__title">
+//                     <Hotel size={20} />
+//                     Hotel Information
+//                   </h3>
+
+//                   <div className="form-grid">
+//                     <div className="form-group">
+//                       <label className="form-label">
+//                         <Hotel size={16} />
+//                         Hotel Name *
+//                       </label>
+//                       <input
+//                         type="text"
+//                         name="hotelName"
+//                         className="form-input"
+//                         placeholder="Enter your hotel name"
+//                         value={formData.hotelName}
+//                         onChange={handleInputChange}
+//                         required
+//                       />
+//                     </div>
+
+//                     <div className="form-group">
+//                       <label className="form-label">
+//                         <Globe size={16} />
+//                         Website URL *
+//                       </label>
+//                       <input
+//                         type="url"
+//                         name="websiteUrl"
+//                         className="form-input"
+//                         placeholder="https://your-hotel-website.com"
+//                         value={formData.websiteUrl}
+//                         onChange={handleInputChange}
+//                         required
+//                       />
+//                     </div>
+
+//                     {/* <div className="form-group">
+//                       <label className="form-label">
+//                         <Star size={16} />
+//                         Booking Engine Provider
+//                       </label>
+//                       <select
+//                         name="bookingEngine"
+//                         className="form-select"
+//                         value={formData.bookingEngine}
+//                         onChange={handleInputChange}
+//                       >
+//                         <option value="">Select provider</option>
+//                         <option value="cloudbeds">Cloudbeds</option>
+//                         <option value="ezee">eZee</option>
+//                         <option value="booking">Booking.com</option>
+//                         <option value="expedia">Expedia</option>
+//                         <option value="other">Other</option>
+//                       </select>
+//                     </div> */}
+//                   </div>
+//                 </div>
+
+//                 <div className="form-section">
+//                   <h3 className="form-section__title">
+//                     <Phone size={20} />
+//                     Contact Information
+//                   </h3>
+
+//                   <div className="form-grid">
+//                     <div className="form-group">
+//                       <label className="form-label">Contact Name *</label>
+//                       <input
+//                         type="text"
+//                         name="contactName"
+//                         className="form-input"
+//                         placeholder="Your full name"
+//                         value={formData.contactName}
+//                         onChange={handleInputChange}
+//                         required
+//                       />
+//                     </div>
+
+//                     <div className="form-group">
+//                       <label className="form-label">
+//                         <Mail size={16} />
+//                         Email Address *
+//                       </label>
+//                       <input
+//                         type="email"
+//                         name="email"
+//                         className="form-input"
+//                         placeholder="your.email@domain.com"
+//                         value={formData.email}
+//                         onChange={handleInputChange}
+//                         required
+//                       />
+//                     </div>
+
+//                     <div className="form-group">
+//                       <label className="form-label">
+//                         <Phone size={16} />
+//                         Phone Number *
+//                       </label>
+//                       <input
+//                         type="tel"
+//                         name="phone"
+//                         className="form-input"
+//                         placeholder="+91 98765 43210"
+//                         value={formData.phone}
+//                         onChange={handleInputChange}
+//                         required
+//                       />
+//                     </div>
+//                   </div>
+
+//                   <div className="form-group">
+//                     <label className="form-label">
+//                       <MapPin size={16} />
+//                       Hotel Address
+//                     </label>
+//                     <textarea
+//                       name="address"
+//                       className="form-textarea"
+//                       placeholder="Enter complete address with city, state, and postal code"
+//                       value={formData.address}
+//                       onChange={handleInputChange}
+//                     />
+//                   </div>
+//                 </div>
+
+//                 <button type="submit" className="submit-btn">
+//                   <Plus size={20} />
+//                   Submit Hotel Listing Request
 //                 </button>
-//               ))}
-//             </div>
+//               </div>
+//             </form>
 //           </div>
-
-//           <div className="filter-section">
-//             <h4>Amenities</h4>
-//             <div className="checkbox-group">
-//               {amenitiesList.map((amenity) => (
-//                 <label key={amenity} className="checkbox-item">
-//                   <input
-//                     type="checkbox"
-//                     checked={filters.amenities.includes(amenity)}
-//                     onChange={(e) => {
-//                       if (e.target.checked) {
-//                         setFilters({
-//                           ...filters,
-//                           amenities: [...filters.amenities, amenity],
-//                         });
-//                       } else {
-//                         setFilters({
-//                           ...filters,
-//                           amenities: filters.amenities.filter(
-//                             (a) => a !== amenity
-//                           ),
-//                         });
-//                       }
-//                     }}
-//                   />
-//                   {amenity}
-//                 </label>
-//               ))}
-//             </div>
-//           </div>
-
-//           <div className="filter-section">
-//             <h4>Hotel Type</h4>
-//             <div className="checkbox-group">
-//               {hotelTypes.map((type) => (
-//                 <label key={type} className="checkbox-item">
-//                   <input
-//                     type="radio"
-//                     name="hotelType"
-//                     checked={filters.hotelType === type}
-//                     onChange={() => setFilters({ ...filters, hotelType: type })}
-//                   />
-//                   {type}
-//                 </label>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Results Section */}
-//         <div className="results-section">
-//           <div className="results-header">
-//             <h2 className="results-title">{hotels.length} Hotels Found</h2>
-//             <div className="view-controls">
-//               <button
-//                 className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
-//                 onClick={() => setViewMode("grid")}
-//               >
-//                 <Grid size={20} />
-//               </button>
-//               <button
-//                 className={`view-btn ${viewMode === "list" ? "active" : ""}`}
-//                 onClick={() => setViewMode("list")}
-//               >
-//                 <List size={20} />
-//               </button>
-//             </div>
-//           </div>
-
-//           <div className={viewMode === "grid" ? "hotels-grid" : "hotels-list"}>
-//             {hotels.map((hotel) => (
-//               <HotelCard
-//                 key={hotel.id}
-//                 hotel={hotel}
-//                 isListView={viewMode === "list"}
-//               />
-//             ))}
-//           </div>
-//         </div>
+//         )}
 //       </div>
-//     </>
+//     </div>
 //   );
 // };
 

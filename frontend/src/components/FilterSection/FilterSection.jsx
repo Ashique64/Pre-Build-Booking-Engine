@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./FilterSection.scss";
 import { Star, Filter } from "lucide-react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const FilterSection = () => {
   const [filters, setFilters] = useState({
@@ -21,6 +23,10 @@ const FilterSection = () => {
   ];
 
   const hotelTypes = ["Boutique", "Resort", "Apartment", "Hotel"];
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
   return (
     <div className="sidebar">

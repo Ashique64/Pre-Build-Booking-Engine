@@ -10,9 +10,81 @@ import {
   Waves,
   Wifi,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+const hotels = [
+  {
+    id: 1,
+    name: "Elixir Hills",
+    location: "Munnar, Kerala",
+    rating: 4.5,
+    userRating: 4.3,
+    price: 6500,
+    image: "/assets/demo-hotel-1.jpg",
+    amenities: ["Free Breakfast", "Wi-Fi", "Pool"],
+    tags: ["Luxury", "Beach Front"],
+    type: "Resort",
+    bookingLink: "https://live.ipms247.com/booking/book-rooms-elixirhills",
+    officialWebsite: "https://www.elixirhills.com/",
+  },
+  {
+    id: 2,
+    name: "Inda Family",
+    location: "Varkala, Kerala",
+    rating: 4.2,
+    userRating: 4.0,
+    price: 4200,
+    image: "/assets/demo-hotel-2.jpg",
+    amenities: ["Wi-Fi", "Parking", "Gym"],
+    tags: ["Pet-friendly", "City Center"],
+    type: "Boutique",
+    bookingLink: "https://indafamily.in/",
+    officialWebsite: "https://indafamily.in/",
+  },
+  {
+    id: 3,
+    name: "The Gundumalai Bungalow",
+    location: "Munnar, Kerala",
+    rating: 4.8,
+    userRating: 4.6,
+    price: 8900,
+    image: "/assets/demo-hotel-3.jpg",
+    amenities: ["Free Breakfast", "Wi-Fi", "Spa", "Pool"],
+    tags: ["Heritage", "Luxury"],
+    type: "Resort",
+    bookingLink: "https://thegundumalaibungalow.bookingjini.in/",
+    officialWebsite: "https://www.thegundumalaibungalow.com/",
+  },
+  {
+    id: 4,
+    name: "Forthill Wildlife Resort",
+    location: "Sultan Bathery, Kerala",
+    rating: 4.1,
+    userRating: 3.9,
+    price: 3200,
+    image: "/assets/demo-hotel-4.jpg",
+    amenities: ["Wi-Fi", "Kitchen", "Parking"],
+    tags: ["Budget-friendly", "Self-service"],
+    type: "Apartment",
+    bookingLink: "http://forthillwildliferesort.com/",
+    officialWebsite: "http://forthillwildliferesort.com/",
+  },
+];
 
 const SearchResult = () => {
   const [viewMode, setViewMode] = useState("grid");
+
+  const navigate = useNavigate()
+
+  const handleOfficialWebsiteNavigate = (event, url) => {
+    event.stopPropagation();
+    window.open(url, "_blank");
+    console.log("Official website opened");
+  };
+
+  const handleCardNavigate = () => {
+    navigate('/hotel-details')
+  }
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -29,8 +101,12 @@ const SearchResult = () => {
   };
 
   const HotelCard = ({ hotel, isListView = false }) => (
-    <div className={`hotel-card ${isListView ? "hotel-card--list" : ""}`}>
+    <div onClick={handleCardNavigate} className={`hotel-card ${isListView ? "hotel-card--list" : ""}`}>
       <div className="hotel-card__image">
+        <div className="verified-tag">
+          <img src="/assets/logo (3).png" alt="Verified" />
+          <span>Verified</span>
+        </div>
         <img src={hotel.image} alt={hotel.name} />
         <div className="hotel-card__rating">
           <div className="stars">{renderStars(hotel.rating)}</div>
@@ -39,7 +115,17 @@ const SearchResult = () => {
       </div>
 
       <div className="hotel-card__content">
-        <h3 className="hotel-card__name">{hotel.name}</h3>
+        <h3 className="hotel-card__name">
+          {hotel.name}
+          <span
+            className="official-tag"
+            onClick={(e) =>
+              handleOfficialWebsiteNavigate(e, hotel.officialWebsite)
+            }
+          >
+            <i className="bx bxs-shield me-1 text-primary"></i>Official
+          </span>
+        </h3>
 
         <div className="hotel-card__location">
           <MapPin size={16} />
@@ -77,61 +163,15 @@ const SearchResult = () => {
           ))}
         </div>
 
-        <button className="hotel-card__book-btn">Book Now</button>
+        <button
+          onClick={() => window.open(hotel.bookingLink, "_blank")}
+          className="hotel-card__book-btn"
+        >
+          Book Now
+        </button>
       </div>
     </div>
   );
-
-  const hotels = [
-    {
-      id: 1,
-      name: "Sunrise Paradise Resort",
-      location: "Goa, India",
-      rating: 4.5,
-      userRating: 4.3,
-      price: 6500,
-      image: "/assets/demo-hotel-1.jpg",
-      amenities: ["Free Breakfast", "Wi-Fi", "Pool"],
-      tags: ["Luxury", "Beach Front"],
-      type: "Resort",
-    },
-    {
-      id: 2,
-      name: "Urban Boutique Hotel",
-      location: "Mumbai, India",
-      rating: 4.2,
-      userRating: 4.0,
-      price: 4200,
-      image: "/assets/demo-hotel-2.jpg",
-      amenities: ["Wi-Fi", "Parking", "Gym"],
-      tags: ["Pet-friendly", "City Center"],
-      type: "Boutique",
-    },
-    {
-      id: 3,
-      name: "Heritage Palace",
-      location: "Rajasthan, India",
-      rating: 4.8,
-      userRating: 4.6,
-      price: 8900,
-      image: "/assets/demo-hotel-3.jpg",
-      amenities: ["Free Breakfast", "Wi-Fi", "Spa", "Pool"],
-      tags: ["Heritage", "Luxury"],
-      type: "Resort",
-    },
-    {
-      id: 4,
-      name: "Modern Apartment Suites",
-      location: "Bangalore, India",
-      rating: 4.1,
-      userRating: 3.9,
-      price: 3200,
-      image: "/assets/demo-hotel-4.jpg",
-      amenities: ["Wi-Fi", "Kitchen", "Parking"],
-      tags: ["Budget-friendly", "Self-service"],
-      type: "Apartment",
-    },
-  ];
 
   return (
     <div className="results-section">

@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchHeader.scss";
-import { Search } from 'lucide-react';
+import { Search } from "lucide-react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 const SearchHeader = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
 
-  
   return (
     <div className="search-header">
       <div className="search-container">
-        <h1 className="search-title">Choose Your Favourite Hotel</h1>
-        <p className="search-subtitle">
+        <h1 className="search-title" data-aos="fade-up">
+          Choose Your Favourite Hotel
+        </h1>
+        <p className="search-subtitle" data-aos="fade-up">
           Discover the perfect place to stay—handpicked hotels for every style,
           budget, and occasion.
         </p>
 
-        <div className="search-bar">
+        <div className="search-bar" data-aos="fade-up">
           <input
             type="text"
             placeholder="Search hotels by name"
